@@ -11,9 +11,7 @@ class Guardian extends Component {
   }
 
   componentDidMount() {
-    // this.props.pullGuardianData();
-    // this.props.fetchData();
-    this.props.fetchFoodItems();
+    this.props.pullGuardianData();
   }
 
   onSubmit(e) {
@@ -29,7 +27,6 @@ class Guardian extends Component {
 
 
   render() {
-    // const { duckduckgo } = this.props
     const { text } = this.state;
     return (
       <div className="container">
