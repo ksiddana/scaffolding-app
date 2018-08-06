@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "ohex_prod",
+    "host": "127.0.01",
+    "dialect": "mysql",
+    "enable": false
+  },
+  "test": {
+    "username": "root",
+    "password": "",
+    "database": "ohex_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "enable": false
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": "",
+    "enable": true
+  }
+}
