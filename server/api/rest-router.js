@@ -9,7 +9,8 @@ module.exports = restRouter = express.Router()
 restRouter.get('/news', (req, res) => {
   // https://content.guardianapis.com/search?api-key=00b7d207-26b2-43b3-8e0a-4743d80f873b
   const url = 'https://content.guardianapis.com/search?api-key=' + GUARDIAN_API_KEY;
-  axios.get(url)
+  const url1 = 'http://api.duckduckgo.com/?q=trees&format=json&pretty=1';
+  axios.get(url1)
     .then(response => {
       res.json(response.data);
     })

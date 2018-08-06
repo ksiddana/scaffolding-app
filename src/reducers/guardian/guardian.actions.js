@@ -1,30 +1,54 @@
-import * as types from "./duckduckgo.types";
+import * as types from "./guardian.types";
 import fetchJSONP from 'fetch-jsonp';
 import axios from 'axios';
 
-const fetchData = value => dispatch => {
-  const url = 'http://api.duckduckgo.com/?q=' + value + '&format=json&pretty=1'
-  console.log("REQUEST URL", url);
+// export const fetchData = value => dispatch => {
+//   const url = 'http://api.duckduckgo.com/?q=' + value + '&format=json&pretty=1'
+//   console.log("REQUEST URL", url);
+//
+//   return fetchJSONP(url).then(response => {
+//     return response.json();
+//   }).then(
+//     request => {
+//       dispatch({
+//         type: types.DUCKDUCKGO_SEARCH_REQUEST,
+//         results: request.RelatedTopics
+//       });
+//     },
+//     error => {
+//       console.log("Error: Retrieving duckduckgo search api results");
+//     });
+// };
+//
+// export const onSubmit = value => dispatch => {
+//   dispatch({
+//     type: types.DUCKDUCKGO_SEARCH_TERM,
+//     searchTerm: value
+//   });
+//
+//   return dispatch(fetchData(value))
+// };
 
-  return fetchJSONP(url).then(response => {
-    return response.json();
-  }).then(
-    request => {
+export const pullGuardianData = () => dispatch => {
+  return fetchJSONP('/api/news').then(serverResponse => {
+    return serverResponse;
+  }).then(serverResponse => {
       dispatch({
-        type: types.DUCKDUCKGO_SEARCH_REQUEST,
-        results: request.RelatedTopics
+        type: DUCKDUCKGO_SEARCH_REQUEST,
+        payload: serverResponse
       });
-    },
-    error => {
-      console.log("Error: Retrieving duckduckgo search api results");
-    });
-};
-
-export const onSubmit = value => dispatch => {
-  dispatch({
-    type: types.DUCKDUCKGO_SEARCH_TERM,
-    searchTerm: value
   });
+}
 
-  return dispatch(fetchData(value))
+export function fetchFoodItems() {
+  return dispatch => {
+    let url = "/api/news";
+
+    return axios.get(url)
+    .then(response => {
+      dispatch({ type: DUCKDUCKGO_SEARCH_REQUEST, payload: response.data });
+    })
+    .catch(error => {
+    });
+  };
 };
