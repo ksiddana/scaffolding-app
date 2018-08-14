@@ -8,9 +8,10 @@ const Pagination = ({ handlePaginationClick }) => {
   const pages = [1,2,3,4,5];
   return (
     <div className="pagination-wrapper">
-      {pages.map((pageNumber) => {
+      {pages.map((pageNumber, index) => {
         return (
           <button
+            key={index}
             onClick={() => handlePaginationClick(pageNumber)}
           >{pageNumber}</button>
         );
@@ -32,11 +33,14 @@ class Guardian extends Component {
   }
 
   renderArticle(article) {
-    const { webTitle, webUrl } = article;
+    const { webTitle, webUrl, webPublicationDate } = article;
+    const event = new Date(webPublicationDate.toString());
+    const date = event.toDateString();
 
     return (
-      <div className="news-container">
+      <div className="news-container" key={webTitle}>
         <a href={webUrl} target="_blank">{webTitle}</a>
+        <div><em>Date: {date}</em></div>
       </div>
     );
   }

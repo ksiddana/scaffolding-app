@@ -1,9 +1,14 @@
 .news-container {
-  padding: 5px 4px 10px;
+  padding: 8px 4px;
   background-color: #E5E5E5;
   margin-bottom: 2px;
 }
 
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .pagination-wrapper button {
-  margin: 5px 3px;
+  margin: 10px 3px;
 }
