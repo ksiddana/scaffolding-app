@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { pullGuardianData, fetchData, fetchFoodItems } from '../reducers/guardian/guardian.actions.js';
+import { pullGuardianData, handlePaginationClick } from '../reducers/guardian/guardian.actions.js';
+// import { Grid, Row, Col } from 'react-bootstrap';
+import './style.css';
+
+const Pagination = ({ handlePaginationClick }) => {
+  const pages = [1,2,3,4,5];
+  return (
+    <div className="pagination-wrapper">
+      {pages.map((pageNumber) => {
+        return (
+          <button
+            onClick={() => handlePaginationClick(pageNumber)}
+          >{pageNumber}</button>
+        );
+      })}
+    </div>
+  );
+};
 
 class Guardian extends Component {
   constructor(props) {
@@ -14,40 +31,34 @@ class Guardian extends Component {
     this.props.pullGuardianData();
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.state.text);
-  }
+  renderArticle(article) {
+    const { webTitle, webUrl } = article;
 
-  handleChange(ev) {
-    this.setState({
-      text: ev.target.value
-    })
+    return (
+      <div className="news-container">
+        <a href={webUrl} target="_blank">{webTitle}</a>
+      </div>
+    );
   }
-
 
   render() {
-    const { text } = this.state;
-    return (
-      <div className="container">
-        <form className="well" onSubmit={this.onSubmit.bind(this)}>
-          <label>Search something ...</label>
-          <input
-            type="text"
-            className="form-control"
-            value={this.state.text}
-            onChange={(ev) => this.handleChange(ev)}
-          />
-        </form>
+    const { results, handlePaginationClick } = this.props;
 
-        <div>
-          {text ? <h2 className="page-header">Results</h2> : ""}
-        </div>
+    return (
+      <div>
+        {results.map(article => this.renderArticle(article))}
+        <Pagination
+          handlePaginationClick={handlePaginationClick}
+        />
       </div>
-    )
+    );
   }
 }
 
 export default connect(state => ({
-  results: state.guardian
-}), { pullGuardianData, fetchData, fetchFoodItems })(Guardian);
+  results: state.guardian.results
+}),
+{
+  pullGuardianData,
+  handlePaginationClick
+})(Guardian);

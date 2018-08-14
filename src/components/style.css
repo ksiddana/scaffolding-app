@@ -1,0 +1,9 @@
+.news-container {
+  padding: 5px 4px 10px;
+  background-color: #E5E5E5;
+  margin-bottom: 2px;
+}
+
+.pagination-wrapper button {
+  margin: 5px 3px;
+}
