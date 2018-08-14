@@ -85,8 +85,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackMiddleware(webpack(webpackConfig)));
   app.use('/', routes);
 
-  app.listen(3000);
-  console.log('DEV ENV server running at http://localhost:3000');
+  app.listen(port);
+  console.log('DEV ENV server running at http://localhost:' + port);
 
 }
 else {
