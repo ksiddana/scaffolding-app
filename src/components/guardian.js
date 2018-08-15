@@ -23,9 +23,6 @@ const Pagination = ({ handlePaginationClick }) => {
 class Guardian extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: ""
-    }
   }
 
   componentDidMount() {
@@ -49,11 +46,11 @@ class Guardian extends Component {
     const { results, handlePaginationClick } = this.props;
 
     return (
-      <div>
-        {results.map(article => this.renderArticle(article))}
-        <Pagination
+      <div className="loader">
+        {results.length > 0 && results.map(article => this.renderArticle(article))}
+        {results.length > 0 && <Pagination
           handlePaginationClick={handlePaginationClick}
-        />
+        />}
       </div>
     );
   }
