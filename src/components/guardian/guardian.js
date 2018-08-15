@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { pullGuardianData, handlePaginationClick } from '../reducers/guardian/guardian.actions.js';
-// import { Grid, Row, Col } from 'react-bootstrap';
-import './style.css';
+import { pullGuardianData, handlePaginationClick } from '../../reducers/guardian/guardian.actions.js';
+import './guardian.css';
 
 const Pagination = ({ handlePaginationClick }) => {
   const pages = [1,2,3,4,5];
@@ -10,7 +9,7 @@ const Pagination = ({ handlePaginationClick }) => {
     <div className="pagination-wrapper">
       {pages.map((pageNumber, index) => {
         return (
-          <button
+          <button className=""
             key={index}
             onClick={() => handlePaginationClick(pageNumber)}
           >{pageNumber}</button>
@@ -37,7 +36,7 @@ class Guardian extends Component {
     return (
       <div className="news-container" key={webTitle}>
         <a href={webUrl} target="_blank">{webTitle}</a>
-        <div><em>Date: {date}</em></div>
+        <div className="publication-date">{date}</div>
       </div>
     );
   }

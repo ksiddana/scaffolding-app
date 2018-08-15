@@ -10,7 +10,7 @@ module.exports = restRouter = express.Router()
 restRouter.use(bodyParser.json({ type: 'application/json' }));
 
 restRouter.get('/news', (req, res) => {
-  // return res.send(searchResponse);
+  return res.send(searchResponse);
   const url = 'https://content.guardianapis.com/search?api-key=' + GUARDIAN_API_KEY;
 
   axios.get(url)
