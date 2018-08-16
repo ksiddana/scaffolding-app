@@ -1,7 +1,7 @@
 const path = require('path');
 const router = require('express').Router();
 const bodyParser = require('body-parser');
-const restRouter = require('./api/rest-router');
+const restRouter = require('./api');
 
 // Server routes...
 router.use('/api', restRouter)
