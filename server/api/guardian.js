@@ -1,30 +1,26 @@
-const express = require('express');
-const bodyParser = require('body-parser');
 const axios = require('axios');
-const https = require('https');
 const searchResponse = require('../mockData/guardian-search-response.json')
 GUARDIAN_API_KEY = '00b7d207-26b2-43b3-8e0a-4743d80f873b';
-const cnn = require('./cnn')
 
-module.exports = restRouter = express.Router()
-
-restRouter.use(bodyParser.json({ type: 'application/json' }));
-restRouter.get('/cnn/top-headlines', cnn);
-
-restRouter.get('/news', (req, res) => {
+const worldNews = (req, res) => {
   // return res.send(searchResponse);
   const url = 'https://content.guardianapis.com/world?api-key=' + GUARDIAN_API_KEY;
 
   axios.get(url)
     .then(response => res.json(response.data))
     .catch(error => res.status(500).json("error"))
-});
+};
 
-restRouter.get('/news/:page', (req, res) => {
+const paginatedWorldNews = (req, res) => {
   const page = req.params.page;
   const url = 'https://content.guardianapis.com/world?' + 'api-key=' + GUARDIAN_API_KEY + '&page=' + page;
 
   axios.get(url)
     .then(response => res.json(response.data))
     .catch(error => res.status(500).send("error in query"))
-});
+};
+
+module.exports = {
+  worldNews,
+  paginatedWorldNews
+};
