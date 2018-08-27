@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { pullCnnHeadlinesData, handlePaginationClick } from '../../reducers/cnn/cnn.actions.js';
+import { getTopHeadlinesData, handlePaginationClick } from '../../reducers/cnn/cnn.actions.js';
 
 const Pagination = ({ handlePaginationClick }) => {
   const pages = [1,2,3,4,5];
@@ -24,7 +24,7 @@ class Cnn extends Component {
   }
 
   componentDidMount() {
-    this.props.pullCnnHeadlinesData();
+    this.props.getTopHeadlinesData();
   }
 
   renderArticle(article) {
@@ -59,6 +59,6 @@ export default connect(state => ({
   results: state.cnn.results
 }),
 {
-  pullCnnHeadlinesData,
+  getTopHeadlinesData,
   handlePaginationClick
 })(Cnn);
