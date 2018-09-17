@@ -9,6 +9,7 @@ const routes = require('./routes.js');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
 const webpackConfig = require('../webpack.config.js');
+const mongoose = require('./db/mongoose');
 
 // console.log(".env file: ", env);
 
@@ -24,27 +25,7 @@ const webpackConfig = require('../webpack.config.js');
 let connection;
 
 if (process.env.NODE_ENV !== 'production' && config.test.enable) {
-  const env = require('dotenv').config();
-  const config = require('./.config.json');
-  connection = mysql.createPool({
-    connectionLimit : 100, //important
-    // host     : databaseConfig.test.host,
-    user     : config.test.username,
-    // password : databaseConfig.test.password,
-    database : config.test.database,
-    debug    : false
-  });
-
-  connection.getConnection(function(err) {
-    if (err) {
-      console.log(err);
-      console.log("\nError in connecting to the TEST Database")
-      return;
-    }
-
-    console.log("Connected with ID: ", connection.threadId);
-    console.log("Connected to TEST Database !!!");
-  });
+  
 }
 
 if (process.env.NODE_ENV === 'production' && config.production.enable) {
@@ -70,14 +51,6 @@ if (process.env.NODE_ENV === 'production' && config.production.enable) {
       // Handle error after the release.
       if (error) throw error;
     });
-  });
-}
-
-function getAllMenuItems(req, res) {
-  connection.query("select * from menu_item", function(err, results){
-      if(!err) {
-          res.json(results);
-      }
   });
 }
 

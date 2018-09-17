@@ -16,7 +16,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         results: action.payload.articles
-      }
+      }    
 
     default:
       return state;

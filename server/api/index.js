@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cnn = require('./cnn');
 const guardian = require('./guardian');
+const { addUser } = require('./mongoose-queries');
 
 const apiRouter = express.Router();
 
@@ -12,5 +13,7 @@ apiRouter.get('/cnn/top-headlines', cnn.getTopHeadlines);
 apiRouter.get('/cnn/everything/:page', cnn.paginatedNews);
 apiRouter.get('/guardian/world', guardian.worldNews);
 apiRouter.get('/guardian/world/:page', guardian.paginatedWorldNews);
+
+apiRouter.post('/users', addUser);
 
 module.exports = apiRouter;

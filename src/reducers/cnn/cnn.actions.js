@@ -31,3 +31,12 @@ export const handlePaginationClick = pageNumber =>  dispatch => {
   .then(response => dispatch({ type: types.GUARDIAN_SEARCH_REQUEST, payload: response.data }))
   .catch();
 }
+
+export const loginUser = (user) => dispatch => {
+  console.log(user);
+  let url = '/api/users';
+
+  axios.post(url, user)
+  .then(response => dispatch({ type: 'LOGIN_CREAT_USER_REQUEST', payload: response }))
+  .catch();
+}
