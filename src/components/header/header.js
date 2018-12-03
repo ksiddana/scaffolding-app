@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './header.css';
-import { loginUser } from '../../reducers/cnn/cnn.actions.js';
+import { loginUser, getGmailEmail } from '../../reducers/cnn/cnn.actions.js';
 
 class Header extends Component {
   constructor(props) {
@@ -38,6 +38,8 @@ class Header extends Component {
         <div className="header-title">Today's Headlines</div>
         <button onClick={() => {this.setState({ showLoginBox: !this.state.showLoginBox })}}>Login</button>
         {this.state.showLoginBox && this.renderLoginBox()}
+        <a href='/auth/google'>Google Login</a>
+        <button onClick={this.props.getGmailEmail}>Get Emails</button>
       </div>
     );
   }
@@ -46,5 +48,6 @@ class Header extends Component {
 export default connect(state => ({
   results: state.guardian.results
 }),
-{ loginUser
+{ loginUser,
+  getGmailEmail
 })(Header);

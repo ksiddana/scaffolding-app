@@ -40,3 +40,11 @@ export const loginUser = (user) => dispatch => {
   .then(response => dispatch({ type: 'LOGIN_CREAT_USER_REQUEST', payload: response }))
   .catch();
 }
+
+export const getGmailEmail = () => dispatch => {
+  let url = '/emails';
+
+  axios.get(url)
+  .then(response => console.log(response))
+  .catch(error => console.log(error));
+}
