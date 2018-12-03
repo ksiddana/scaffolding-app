@@ -25,33 +25,33 @@ const mongoose = require('./db/mongoose');
 let connection;
 
 if (process.env.NODE_ENV !== 'production' && config.test.enable) {
-  
+
 }
 
 if (process.env.NODE_ENV === 'production' && config.production.enable) {
-  connection = mysql.createPool({
-    host     : process.env.CLEAR_DB_HOST,
-    user     : process.env.CLEAR_DB_USERNAME,
-    password : process.env.CLEAR_DB_PASSWORD,
-    database : process.env.CLEAR_DB_DATABASE
-  });
-
-  connection.getConnection(function(error) {
-    // connected! (unless `err` is set)
-    if (error) {
-      console.log(error);
-      console.log("\nError in connecting to the PRODUCTION Database")
-      return;
-    }
-
-    // console.log("Connected with ID: ", connection.threadId);
-    console.log("Connected to PRODUCTION Database !!!");
-
-    connection.query("select * from menu_item", function(error, results){
-      // Handle error after the release.
-      if (error) throw error;
-    });
-  });
+  // connection = mysql.createPool({
+  //   host     : process.env.CLEAR_DB_HOST,
+  //   user     : process.env.CLEAR_DB_USERNAME,
+  //   password : process.env.CLEAR_DB_PASSWORD,
+  //   database : process.env.CLEAR_DB_DATABASE
+  // });
+  //
+  // connection.getConnection(function(error) {
+  //   // connected! (unless `err` is set)
+  //   if (error) {
+  //     console.log(error);
+  //     console.log("\nError in connecting to the PRODUCTION Database")
+  //     return;
+  //   }
+  //
+  //   // console.log("Connected with ID: ", connection.threadId);
+  //   console.log("Connected to PRODUCTION Database !!!");
+  //
+  //   connection.query("select * from menu_item", function(error, results){
+  //     // Handle error after the release.
+  //     if (error) throw error;
+  //   });
+  // });
 }
 
 if (process.env.NODE_ENV !== 'production') {
